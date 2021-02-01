@@ -1,0 +1,8 @@
+<div class='m-5 p-2'>
+
+    <h3> <%=@idea.title%> </h3>
+    <p> <%=@idea.description%> </p>
+
+    <%= link_to("Edit",edit_idea_path(@idea.id), class: 'btn btn-primary my-2')%>
+    <%= link_to("Delete",idea_path(@idea), method: :delete, data:{confirm: "Are you sure ?"}, class: 'btn btn-primary my-2')%>
+</div>

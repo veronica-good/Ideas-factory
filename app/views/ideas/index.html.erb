@@ -1,0 +1,16 @@
+
+<div class="container">
+    <%# <div class="row"> %>
+    <% @ideas.each do |i| %>
+        <div class="p-2 my-3">
+            
+            <div class="card-body">
+                <h5 class="card-title"><%=link_to i.title, idea_path(i.id)%></h5>
+                <p class="card-text"><%=i.description%></p>
+                
+            </div>
+        </div>
+        <hr>
+    <%end%>
+    <%# </div> %>
+</div>
