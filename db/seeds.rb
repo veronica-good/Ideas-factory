@@ -5,3 +5,17 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Idea.delete_all
+
+50.times do
+    created_at=Faker::Date.backward(days: 365)
+    Idea.create(
+        title: Faker::Lorem.sentence,
+        description: Faker::Lorem.paragraph_by_chars,
+        created_at: created_at,
+        updated_at: created_at
+    )
+end
+
+i=Idea.all
+puts "Created #{i.count} ideas"
