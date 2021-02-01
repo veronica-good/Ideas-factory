@@ -1,5 +1,7 @@
 class IdeasController < ApplicationController
+    before_action :authenticate_user!, except: [:index, :show]
     before_action :find_idea, only: [:show, :edit, :update, :destroy]
+    before_action :authorize_user!,only:[:edit,:update,:destroy]
     
     def new
         @idea=Idea.new
@@ -7,7 +9,7 @@ class IdeasController < ApplicationController
 
     def create
         @idea=Idea.new idea_params
-        # @idea.user = current_user
+        @idea.user = current_user
         if @idea.save
             flash[:notice]='idea created successfully!'
             redirect_to @idea
@@ -48,4 +50,7 @@ class IdeasController < ApplicationController
         params.require(:idea).permit(:title, :description)
     end
 
+    def authorize_user!
+        redirect_to root_path, alert: 'Not Authorized' unless can?(:crud, @idea)
+    end
 end
