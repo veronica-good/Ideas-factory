@@ -38,7 +38,7 @@
         <%# DELETE review%>
         <%if can? :crud, review%>
             <div class="d-flex justify-content-end">
-                <%=link_to "Delete", idea_review_path(@idea, review), 
+                <%=link_to "Delete", review_path(review), 
                 method: :delete, data: {confirm: 'Are you sure?'}, 
                 class: 'btn btn-danger'%>
             </div>

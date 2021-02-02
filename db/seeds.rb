@@ -7,14 +7,15 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 Idea.delete_all
 User.delete_all
+Review.delete_all
+Like.delete_all
 
 PASSWORD='supersecret'
 super_user= User.create(
     first_name: 'John',
     last_name:'Snow',
     email: 'js@winterfell.gov',
-    password: PASSWORD,
-    # is_admin: true
+    password: PASSWORD
 )
 12.times do
     User.create(
@@ -45,9 +46,10 @@ u=User.all
                 updated_at: created_at
             )
         end
+        j.likers=u.shuffle.slice(0,rand(u.count))
     end
 end
 
 i=Idea.all
 r=Review.all
-puts "Created #{i.count} ideas, #{u.count} users, #{r.count} reviews"
+puts "Created #{i.count} ideas, #{u.count} users, #{r.count} reviews, #{Like.count} likes"

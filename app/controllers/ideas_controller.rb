@@ -20,6 +20,7 @@ class IdeasController < ApplicationController
 
     def index
         @ideas=Idea.all.order(created_at: :desc)
+        # @like=@idea.likes.find_by(user: current_user)
     end
 
     def show
@@ -40,7 +41,7 @@ class IdeasController < ApplicationController
 
     def destroy
         @idea.destroy
-        redirect_to ideas_path
+        redirect_to root_path, notice: 'Idea deleted!'
     end
 
     private
