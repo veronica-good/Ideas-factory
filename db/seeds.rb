@@ -28,14 +28,26 @@ u=User.all
 
 50.times do
     created_at=Faker::Date.backward(days: 365)
-    Idea.create(
+    j=Idea.create(
         title: Faker::Lorem.sentence,
         description: Faker::Lorem.paragraph_by_chars,
         created_at: created_at,
         updated_at: created_at,
         user: u.sample
     )
+    if j.valid?
+        j.reviews=rand(0..15).times.map do
+            created_at=Faker::Date.backward(days: 36)
+            Review.new(
+                body: Faker::GreekPhilosophers.quote,
+                user: u.sample, 
+                created_at: created_at,
+                updated_at: created_at
+            )
+        end
+    end
 end
 
 i=Idea.all
-puts "Created #{i.count} ideas, #{u.count} users"
+r=Review.all
+puts "Created #{i.count} ideas, #{u.count} users, #{r.count} reviews"

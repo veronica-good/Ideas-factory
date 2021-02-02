@@ -4,8 +4,8 @@
     <% @ideas.each do |i| %>
         <div class="p-2 my-3">
             
-            <div class="card-body">
-                <h5 class="card-title"><%=link_to i.title, idea_path(i.id)%></h5>
+            <div class="">
+                <strong><%=link_to i.title, idea_path(i.id), class: 'link-dark'%></strong>
                 <p class="card-text"><%=i.description%></p>
                 <a href="#">By: <%= i.user&.full_name|| "DELETED" %></a>
                 

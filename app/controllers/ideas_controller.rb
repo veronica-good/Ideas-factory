@@ -19,10 +19,12 @@ class IdeasController < ApplicationController
     end
 
     def index
-        @ideas=Idea.all.order('created_at DESC')
+        @ideas=Idea.all.order(created_at: :desc)
     end
 
     def show
+        @review=Review.new
+        @reviews=@idea.reviews.order(created_at: :desc)
     end
 
     def edit
