@@ -1,0 +1,50 @@
+<div class='m-5 p-2'>
+
+    <h3> <%=@idea.title%> </h3>
+    <p> <%=@idea.description%> </p>
+    <%if can? :crud, @idea%>
+    <%= link_to("Edit",edit_idea_path(@idea.id), class: 'btn btn-primary my-2')%>
+    <%end%>
+    <%if can? :crud, @idea%>
+    <%= link_to("Delete",idea_path(@idea), method: :delete, data:{confirm: "Are you sure ?"}, class: 'btn btn-primary my-2')%>
+    <%end%>
+
+    <%# reviews %>
+    <%# NEW %>
+    <div class='shadow-sm p-3 m-3 round'>
+        <%= form_with model:[@idea, @review], local: true do |f| %>
+            
+            <div class='form-group'>
+                <%= f.label 'Leave a review:' %>
+                <%= f.text_area(:body, class: 'form-control', placeholder: 'Your thoughts here' )%>
+            </div>
+
+            <%= f.submit class: 'btn btn-primary mt-2'%>
+        <% end %>
+    </div>
+
+    <%# LIST of reviews %>
+    <h2 class="display-6 m-3"> Here's what other people thinking: </h2>
+    <% @reviews.each do |review| %>
+    <div class="list-group m-3">
+    <li class="list-group-item list-group-item-light">
+        <%= review.body %>
+        <small>
+        <em>
+        <p class='my-2'>Reviewed by: <%= review.user&.full_name ||"DELETED"%>
+        <br><%= time_ago_in_words(review.updated_at)%> ago</p>
+        </em>
+    </small>
+        <%# DELETE review%>
+        <%if can? :crud, review%>
+            <div class="d-flex justify-content-end">
+                <%=link_to "Delete", review_path(review), 
+                method: :delete, data: {confirm: 'Are you sure?'}, 
+                class: 'btn btn-danger'%>
+            </div>
+        <%end%>
+    </li>
+    
+    </div>
+<% end %>
+</div>

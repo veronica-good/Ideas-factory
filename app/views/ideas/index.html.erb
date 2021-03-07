@@ -1,0 +1,27 @@
+
+<div class="container-fluid">
+    
+    <% @ideas.each do |i| %>
+        <div class="p-2 my-3">
+            
+            <div class="me-auto">
+                <strong><%=link_to i.title, idea_path(i.id), class: 'link-dark'%></strong>
+                <p class="card-text"><%=i.description%></p>
+                <a href="#">By: <%= i.user&.full_name|| "DELETED" %></a> 
+                <% like = i.likes.find_by(user: current_user)%>
+                <% if like.present? %>
+                    <%= link_to 'unlike', like_path(like),method: :delete, class: "btn btn-outline-dark"  %> 
+                <% else %>  
+                    <%= link_to 'like', idea_likes_path(i), method: :post, class: "btn btn-outline-dark"  %> 
+                <% end %>
+                <div class='d-flex justify-content-end'>
+                    <small>
+                        Liked by: <%= i.likes.count %>
+                    </small>                 
+                </div>            
+            </div>
+
+        <hr>
+    <%end%>
+    
+</div>

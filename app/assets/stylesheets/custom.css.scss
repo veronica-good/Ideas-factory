@@ -1,0 +1,17 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+hr{
+    display:block;
+    border:none;
+    height: 3px;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(rgb(95, 95, 95)), to(rgb(194, 193, 193)));
+}
+
+body{
+    font-family: 'Architects Daughter', cursive;
+    font-size: 18px;
+    background-image: url("note.jpg");
+}
+.link-dark{
+    color: black;
+}

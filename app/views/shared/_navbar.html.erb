@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="nav-item">
+    <img src="https://pics.freeicons.io/uploads/icons/png/4094795401543238922-512.png"
+    width="50">
+    <p><%=link_to 'Idea Factory', root_path, class: 'link-dark'%></p>
+    
+    </div>
+    
+    
+    <div class='container justify-content-end'>
+                
+        <% if user_signed_in? %>
+        
+        <div class="nav-item m-2">
+            <strong>Hi, <%=current_user.full_name %> </strong>
+        </div>
+        
+        <div>
+            <%= link_to "Logout", session_path, method: :delete,
+            data: {confirm: 'Are you sure you want to log out?'}%>
+        </div>
+        
+        <% else %> 
+
+        <div class="nav-item">
+            <%=link_to 'Sign In', new_session_path, class: 'nav-link'%>
+        </div>
+        
+        <div class="nav-item">
+            <%=link_to 'Sign Up', new_user_path, class: 'nav-link'%>
+        </div>
+        <%end%>
+        
+        <div class="nav-item ml-1">
+            <%=link_to 'New Idea', new_idea_path, class: 'btn btn-outline-dark'%>
+        </div>
+    </div>
+</nav>
+<hr>
